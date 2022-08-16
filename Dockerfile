@@ -1,4 +1,10 @@
-FROM jenkins/inbound-agent:4.10-3-jdk11
+FROM jenkins/inbound-agent:alpine
+
+USER root
+
+# Alpine seems to come with libcurl baked in, which is prone to mismatching
+# with newer versions of curl. The solution is to upgrade libcurl.
+RUN apk update && apk add -u libcurl curl
 
 ENV DOCKERVERSION=20.10.5
 ENV KUBECTLVERSION=v1.21.1
@@ -12,4 +18,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL
 	&& chmod +x ./kubectl \
 	&& mv ./kubectl /usr/local/bin/kubectl
 
-LABEL org.opencontainers.image.source https://github.com/nvtienanh/dind-kubectl
+RUN touch /debug-flag
+USER jenkins
+
+LABEL org.opencontainers.image.source https://github.com/nvtienanh/jenkins-agent-docker-kubectl
