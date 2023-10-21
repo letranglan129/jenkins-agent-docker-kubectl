@@ -37,8 +37,8 @@ pipeline {
             }
             steps {
                 container(name: 'kaniko') {
-                    sh 'ls `pwd`'
-                    sh '/kaniko/executor --context=`pwd` --dockerfile=`pwd`/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
+                    sh 'ls src'
+                    sh '/kaniko/executor --context=src --dockerfile=src/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
                 }
             }
         }
