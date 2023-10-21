@@ -16,12 +16,6 @@ pipeline {
                         [name: params.GIT_BRANCH],
                     ],
                     doGenerateSubmoduleConfigurations: false,
-                    // extensions: [
-                    //     [
-                    //         $class: 'RelativeTargetDirectory',
-                    //         relativeTargetDir: 'src',
-                    //     ],
-                    // ],
                     submoduleCfg: [],
                     userRemoteConfigs: [
                         [
@@ -39,7 +33,6 @@ pipeline {
             steps {
                 unstash 'sources'
                 container(name: 'kaniko') {
-                    sh 'ls `pwd`'
                     sh '/kaniko/executor --context=`pwd` --dockerfile=`pwd`/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
                 }
             }
