@@ -16,12 +16,12 @@ pipeline {
                         [name: params.GIT_BRANCH],
                     ],
                     doGenerateSubmoduleConfigurations: false,
-                    // extensions: [
-                    //     [
-                    //         $class: 'RelativeTargetDirectory',
-                    //         relativeTargetDir: 'src',
-                    //     ],
-                    // ],
+                    extensions: [
+                        [
+                            $class: 'RelativeTargetDirectory',
+                            relativeTargetDir: 'src',
+                        ],
+                    ],
                     submoduleCfg: [],
                     userRemoteConfigs: [
                         [
