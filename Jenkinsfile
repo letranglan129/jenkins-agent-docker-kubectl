@@ -29,6 +29,8 @@ pipeline {
                         ],
                     ],
                 ])
+                sh 'echo pwd'
+                sh 'ls src'
             }
         }
         stage("Build docker") {
