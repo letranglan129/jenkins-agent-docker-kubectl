@@ -30,6 +30,7 @@ pipeline {
                     ],
                 ])
                 sh 'echo `pwd`'
+                sh 'echo ${WORKSPACE}'
             }
         }
         stage("Build docker") {
@@ -38,6 +39,7 @@ pipeline {
             }
             steps {
                 container(name: 'kaniko') {
+                    sh 'echo ${WORKSPACE}'
                     sh 'ls `pwd`/src'
                     sh '/kaniko/executor --context=src --dockerfile=src/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
                 }
