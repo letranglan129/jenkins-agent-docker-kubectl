@@ -16,12 +16,12 @@ pipeline {
                         [name: params.GIT_BRANCH],
                     ],
                     doGenerateSubmoduleConfigurations: false,
-                    extensions: [
-                        [
-                            $class: 'RelativeTargetDirectory',
-                            relativeTargetDir: 'src',
-                        ],
-                    ],
+                    // extensions: [
+                    //     [
+                    //         $class: 'RelativeTargetDirectory',
+                    //         relativeTargetDir: 'src',
+                    //     ],
+                    // ],
                     submoduleCfg: [],
                     userRemoteConfigs: [
                         [
@@ -29,8 +29,7 @@ pipeline {
                         ],
                     ],
                 ])
-                sh 'echo `pwd`'
-                sh 'echo ${WORKSPACE}'
+                stash name: 'sources', includes: '**', excludes: '**/.git,**/.git/**'
             }
         }
         stage("Build docker") {
@@ -38,10 +37,10 @@ pipeline {
                 label 'docker-build'
             }
             steps {
+                unstash 'sources'
                 container(name: 'kaniko') {
-                    sh 'echo ${WORKSPACE}'
-                    sh 'ls `pwd`/src'
-                    sh '/kaniko/executor --context=src --dockerfile=src/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
+                    sh 'ls `pwd`'
+                    sh '/kaniko/executor --context=`pwd` --dockerfile=`pwd`/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
                 }
             }
         }
