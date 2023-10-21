@@ -29,8 +29,7 @@ pipeline {
                         ],
                     ],
                 ])
-                sh 'echo pwd'
-                sh 'ls src'
+                sh 'echo `pwd`'
             }
         }
         stage("Build docker") {
@@ -39,7 +38,7 @@ pipeline {
             }
             steps {
                 container(name: 'kaniko') {
-                    sh 'ls src'
+                    sh 'ls `pwd`/src'
                     sh '/kaniko/executor --context=src --dockerfile=src/Dockerfile  --destination=nvtienanh/jnlp-from-kaniko:latest'
                 }
             }
