@@ -34,6 +34,7 @@ pipeline {
                 unstash 'sources'
                 container(name: 'kaniko') {
                     sh 'ls'
+                    sh 'echo $PWD'
                 }
             }
         }
