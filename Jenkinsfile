@@ -33,7 +33,7 @@ pipeline {
             steps {
                 unstash 'sources'
                 container(name: 'kaniko') {
-                    sh 'ls'
+                    sh '/kaniko/executor --context=`pwd` --dockerfile=`pwd`/Dockerfile  --destination=letranglan129/jnlp-from-kaniko:latest'
                 }
             }
         }
