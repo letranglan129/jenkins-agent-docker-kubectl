@@ -37,6 +37,7 @@ pipeline {
                     sh 'echo $PWD'
                     sh 'ls /home/jenkins/agent'
                     sh 'ls /kaniko/.docker'
+                    sh '/kaniko/executor --context=`pwd` --dockerfile=`pwd`/Dockerfile --destination=letranglan129/jnlp-from-kaniko:latest'
                 }
             }
         }
