@@ -35,6 +35,8 @@ pipeline {
                 container(name: 'kaniko') {
                     sh 'ls'
                     sh 'echo $PWD'
+                    sh 'ls /home/jenkins/agent''
+                    sh 'ls /kaniko/.docker'
                 }
             }
         }
