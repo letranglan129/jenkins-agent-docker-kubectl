@@ -4,7 +4,7 @@ pipeline {
         skipDefaultCheckout()
     }
     parameters {
-        string(name:'GIT_URL', defaultValue:'https://github.com/nvtienanh/jenkins-agent-docker-kubectl.git', description:'The URL of the source Git repository to use.')
+        string(name:'GIT_URL', defaultValue:'https://github.com/letranglan129/jenkins-agent-docker-kubectl.git', description:'The URL of the source Git repository to use.')
         string(name:'GIT_BRANCH', defaultValue:'main', description:'The branch in the source Git repository to use.')
     }
     stages {
