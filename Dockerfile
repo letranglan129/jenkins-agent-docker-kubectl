@@ -1,5 +1,11 @@
-FROM jenkins/inbound-agent:alpine
-USER root
-ENV KUBECTLVERSION=1.28.3
-RUN curl -fsSL https://dl.k8s.io/release/v$KUBECTLVERSION/bin/linux/amd64/kubectl > /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl
-USER jenkins
+#FROM - Image to start building on.
+FROM ubuntu:14.04
+
+#MAINTAINER - Identifies the maintainer of the dockerfile.
+MAINTAINER ian.miell@gmail.com
+
+#RUN - Runs a command in the container
+RUN echo "Hello world" > /tmp/hello_world.txt
+
+#CMD - Identifies the command that should be used by default when running the image as a container.
+CMD ["cat", "/tmp/hello_world.txt"]
